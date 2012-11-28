@@ -21,7 +21,8 @@
 				switch ($_POST['with-selected']) {
 					case 'rebuild':
 						foreach ($checked as $handle) {
-							ElasticSearch::getIndex()->getType($handle)->delete();
+                                                        # this breaks mappings if the mapping doesn't already exist
+							#ElasticSearch::getIndex()->getType($handle)->delete();
 							ElasticSearch::createType($handle);
 							redirect("{$this->uri}/mappings/");
 						}
